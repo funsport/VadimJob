@@ -1,0 +1,55 @@
+<html>
+  <head>
+    <title>Test for job</title>
+    <script src="class/jquery-3.1.0.min.js"></script>
+      <style>
+          body {
+              background: radial-gradient(at top, #FEFFFF, #A7CECC);
+            }         
+          TABLE {
+            border-collapse: collapse; 
+            }
+            TH, TD {
+                border: 1px solid black; 
+                padding: 4px;
+            }
+            TH {
+                color: #fff;
+                text-align: center; 
+                background: rgb(232,95,76);
+                vertical-align: bottom; 
+                padding: 0;
+            }
+            button {
+                  color: #fff; 
+                  text-decoration: none;
+                  user-select: none; 
+                  background: rgb(212,75,56); 
+                  padding: .7em 1.5em; 
+                  outline: none; 
+            } 
+            button:hover { background: rgb(232,95,76); } 
+            button:active { background: rgb(152,15,0); } 
+      </style>
+  </head>
+  <body align="center">
+    <button id="proxyparse">PARSE</button>
+    <script language="javascript" type="text/javascript">
+    $('#proxyparse').click( function() {
+      $.ajax({
+        type: 'POST',
+          url: 'class/ProxyParser.php',
+          data: 'do=table',
+          beforeSend:function() {
+            $(":submit").attr("disabled", true);
+            $("#result").html("<center></br><img src='class/ajax-loader.gif'></br></br>Loading...</center>");},
+          success: function(data){
+            $(":submit").attr("disabled", false);
+            $('#result').html(data);
+          }
+      });
+    });
+    </script>
+    <div id="result" align="center"></div>
+  </body>
+</html>
